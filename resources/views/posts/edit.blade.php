@@ -1,0 +1,28 @@
+@extends('layouts.app')
+@section('content')
+    <h1 class="mb-6 text-2xl bold">Edit Post</h1>
+    {!! Form::open(['action' => ['PostController@update', $post->id], 'method' => 'POST', 'enctype'=>'multipart/form-data']) !!}
+        <div>
+            {!! Form::label('title', 'Title') !!}
+            <br>
+            {{-- Passing in the value of the post title --}}
+            {!! Form::text('title', $post->title, ['class'=>'bg-gray-200 shadow w-full p-2 mt-2 mb-6', 'placeholder'=>'Title']) !!}
+        </div>
+        <div>
+            {!! Form::label('body', 'Body') !!}
+            <br>
+            {{-- Passing in the value of the post body --}}
+            {!! Form::textarea('body', $post->body, ['class'=>'bg-gray-200 shadow w-full p-2 mt-2 mb-6', 'placeholder'=>'Body Text']) !!}
+        </div>
+        <div>
+            {!! Form::file('cover_image', ['class'=>'p-2 mt-2 mb-6']) !!}
+        </div>
+        {{--
+            This hidden form allows us to spoof a
+            PUT request to update the post
+        --}}
+        {!! Form::hidden('_method', 'PUT') !!}
+        {!! Form::submit('Submit', ['class'=>'p-2 m-2 cust-yellow shadow-lg rounded-lg']) !!}
+    {!! Form::close() !!}
+
+@endsection
